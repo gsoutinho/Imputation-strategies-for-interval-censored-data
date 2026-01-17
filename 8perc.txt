@@ -1,0 +1,85 @@
+> (bias_pm<-round(sum(abs(results$midpoint-results$true)/length(results$true)),3)) 
+[1] 192.426
+> (bias_xgb_1e9_scaled<-round(sum(abs(results$xgb_1e9_scaled-results$true)/length(results$true)),3)) 
+[1] 160.84
+> (bias_lnorm_1e9_scaled<-round(sum(abs(results$lnorm_1e9_scaled-results$true)/length(results$true)),3)) 
+[1] 178.921
+> (bias_wei_1e9_scaled<-round(sum(abs(results$wei_1e9_scaled-results$true)/length(results$true)),3)) 
+[1] 196.123
+> (bias_exp_1e9_scaled<-round(sum(abs(results$exp_1e9_scaled-results$true)/length(results$true)),3)) 
+[1] 182.66
+> (bias_gaus_1e9_scaled<-round(sum(abs(results$gaus_1e9_scaled-results$true)/length(results$true)),3)) 
+[1] 178.213
+> (bias_xgb_1e9_no_scaled<-round(sum(abs(results$xgb_1e9_no_scaled-results$true)/length(results$true)),3)) 
+[1] 234.521
+> 
+> (var_pm<-sum((results$midpoint-results$true)^2)/(length(results$true)-1))
+[1] 1425206
+> (var_xgb_1e9_scaled<-sum((results$xgb_1e9_scaled-results$true)^2)/(length(results$true)-1))
+[1] 682270.4
+> (var_lnorm_1e9_scaled<-sum((results$lnorm_1e9_scaled-results$true)^2)/(length(results$true)-1))
+[1] 1092761
+> (var_wei_1e9_scaled<-sum((results$wei_1e9_scaled-results$true)^2)/(length(results$true)-1))
+[1] 1749843
+> (var_exp_1e9_scaled<-sum((results$exp_1e9_scaled-results$true)^2)/(length(results$true)-1))
+[1] 1223338
+> (var_gaus_1e9_scaled<-sum((results$gaus_1e9_scaled-results$true)^2)/(length(results$true)-1))
+[1] 915129.3
+> (var_xgb_1e9_no_scaled<-sum((results$xgb_1e9_no_scaled-results$true)^2)/(length(results$true)-1))
+[1] 1100782
+> 
+> (mse_pm<-round(sqrt(bias_pm^2+var_pm),3))
+[1] 1209.229
+> (mse_xgb_1e9_scaled<-round(sqrt(bias_xgb_1e9_scaled^2+var_xgb_1e9_scaled),3))
+[1] 841.511
+> (mse_lnorm_1e9_scaled<-round(sqrt(bias_lnorm_1e9_scaled^2+var_lnorm_1e9_scaled),3))
+[1] 1060.554
+> (mse_wei_1e9_scaled<-round(sqrt(bias_wei_1e9_scaled^2+var_exp_1e9_scaled),3))
+[1] 1123.3
+> (mse_exp_1e9_scaled<-round(sqrt(bias_exp_1e9_scaled^2+var_exp_1e9_scaled),3))
+[1] 1121.027
+> (mse_gaus_1e9_scaled<-round(sqrt(bias_gaus_1e9_scaled^2+var_gaus_1e9_scaled),3))
+[1] 973.082
+> (mse_xgb_1e9_no_scaled<-round(sqrt(bias_xgb_1e9_no_scaled^2+var_xgb_1e9_no_scaled),3))
+[1] 1075.073
+> 
+> #Median absolute deviation (MAD):
+> 
+> round(median(abs(results$midpoint-results$true)),3)  #[abs(results$midpoint-results$true)!=0])
+[1] 30.367
+> round(median(abs(results$xgb_1e9_scaled-results$true)),3)
+[1] 28.532
+> round(median(abs(results$lnorm_1e9_scaled-results$true)),3)
+[1] 29.713
+> round(median(abs(results$wei_1e9_scaled-results$true)),3)
+[1] 29.551
+> round(median(abs(results$exp_1e9_scaled-results$true)),3)
+[1] 30.337
+> round(median(abs(results$gaus_1e9_scaled-results$true)),3)
+[1] 30.703
+> round(median(abs(results$xgb_1e9_no_scaled-results$true)),3)
+[1] 42.355
+> 
+> # C-index entre imputado e real
+> 
+> rcorr.cens(results$midpoint, Surv(results$true, results$status))[1]
+  C Index 
+0.9200507 
+> rcorr.cens(results$xgb_1e9_scaled, Surv(results$true, results$status))[1]
+  C Index 
+0.9202482 
+> rcorr.cens(results$lnorm_1e9_scaled, Surv(results$true, results$status))[1]
+  C Index 
+0.9186725 
+> rcorr.cens(results$wei_1e9_scaled, Surv(results$true, results$status))[1]
+  C Index 
+0.9192281 
+> rcorr.cens(results$exp_1e9_scaled, Surv(results$true, results$status))[1]
+  C Index 
+0.9190219 
+> rcorr.cens(results$gaus_1e9_scaled, Surv(results$true, results$status))[1]
+ C Index 
+0.916476 
+> rcorr.cens(results$xgb_1e9_no_scaled, Surv(results$true, results$status))[1]
+ C Index 
+0.855049 
